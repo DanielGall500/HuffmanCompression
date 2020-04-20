@@ -68,8 +68,7 @@ public class HuffmanTree
     	Node n1 = nodes.get(i);
 		Node n2 = nodes.get(j);
 
-		int totalFreq = n1.getFrequency() + 
-							n2.getFrequency();
+		int totalFreq = n1.getFrequency() + n2.getFrequency();
 
 		Node newNode = new Node(totalFreq);
 
@@ -77,18 +76,6 @@ public class HuffmanTree
 		newNode.setRight(n2);
     	
     	return newNode;
-    }
-
-    private Node connect(Node left, Node right)
-    {
-    	int freq = left.getFrequency() +
-    			    right.getFrequency();
-
-    	Node n = new Node(freq);
-    	n.setLeft(left);
-    	n.setRight(right);
-
-    	return n;
     }
 
     public FrequencyTable getTable()
