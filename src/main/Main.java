@@ -12,13 +12,6 @@ public class Main {
 
         HuffmanTree tree = new HuffmanTree(test);
 
-        HashMap<Character, String> codes = tree.getEncodings();
-
-        Set<Character> chars = codes.keySet();
-
-        for(Character c : chars)
-        {
-            System.out.println(c + ": " + codes.get(c));
-        }
+        System.out.println(tree.getCompressedOutput());
     }
 }

@@ -16,6 +16,8 @@ public class HuffmanTree
 
     private Node ROOT;
 
+    private String compressedOutput = "";
+
     public HuffmanTree(String input)
     {
 		freqTable = new FrequencyTable(input);
@@ -49,16 +51,28 @@ public class HuffmanTree
 		this.ROOT = freqTable.get(0);
 		freqTable.remove(0);
 
-
 		//Assign Encodings
 		encodings = new TrieEncoder(ROOT).getEncodings();
+
+		//Create Actual Output After Compression
+		char[] text = input.toCharArray();
+
+		for(char c : text)
+		{
+			String encodedChar = encodings.get(c);
+			compressedOutput += encodedChar;
+		}
     }
+
+    public String getCompressedOutput()
+	{
+		return this.compressedOutput;
+	}
 
     public HashMap<Character, String> getEncodings()
     {
     	return this.encodings;
     }
-
 
     private Node connectNodes(ArrayList<Node> nodes, int i, int j)
     {
