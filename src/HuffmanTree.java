@@ -1,6 +1,8 @@
 package src;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
 
 class HuffmanTree
 {
@@ -177,6 +179,8 @@ class HuffmanTree
 
     	private boolean hasChar;
 
+    	private int encoding;
+
     	private boolean hasLeft  = false;
     	private boolean hasRight = false;
 
@@ -193,6 +197,12 @@ class HuffmanTree
     		hasChar = false;
 
     		this.frequency = f;
+    	}
+
+    	//Encodes A Value To Node
+    	public void setEncoding(int e)
+    	{
+    		this.encoding = e;
     	}
 
     	public void setRight(Node n)
@@ -250,6 +260,8 @@ class HuffmanTree
 
     ArrayList<Node> nodeStorage = new ArrayList<>();
 
+    HashMap<Character, String> encodings;
+
     private Node ROOT;
 
     public HuffmanTree(String input)
@@ -291,7 +303,57 @@ class HuffmanTree
 		this.ROOT = nodeStorage.get(0);
 		nodeStorage.remove(0);
 
+
+		//Assign Encodings
+		encodings = new HashMap<>();
+
+		assignEncodings(encodings, ROOT, "");
+
+
+
+
+
     }
+
+    private void assignEncodings(HashMap<Character, String> encodings, 
+    	Node root, String encoding)
+    {
+    	Node l, r;
+    	String newEnc;
+
+    	if(root.hasLeft())
+    	{
+    		l = root.getLeft();
+    		newEnc = encoding + "0";
+
+    		l.setEncoding(0);
+
+    		if(l.hasChar())
+    			encodings.put(l.getChar(), newEnc);
+
+    		assignEncodings(encodings, l, newEnc);
+    	}
+
+    	if(root.hasRight())
+    	{
+    		r = root.getRight();
+    		newEnc = encoding + "1";
+
+    		r.setEncoding(1);
+
+    		if(r.hasChar())
+    			encodings.put(r.getChar(), newEnc);
+
+    		assignEncodings(encodings, r, newEnc);
+    	}
+    }
+
+    public HashMap<Character, String> getEncodings()
+    {
+    	return this.encodings;
+    }
+
+
 
     private void sortNodes(ArrayList<Node> list)
     {
@@ -411,9 +473,14 @@ class HuffmanTree
 		
 		HuffmanTree tree = new HuffmanTree(test);
 
-		Node r = tree.getRoot();
+		HashMap<Character, String> codes = tree.getEncodings();
 
-		tree.print(r);
+		Set<Character> chars = codes.keySet();
+
+		for(Character c : chars)
+		{
+			System.out.println(c + ": " + codes.get(c));
+		}
 	}
 
     
