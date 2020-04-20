@@ -433,39 +433,6 @@ class HuffmanTree
     {
     	return this.ROOT;
     }
-
-    public void print(Node root)
-    {
-    	System.out.println("New Node");
-
-    	if(root.hasChar())
-    		System.out.println(root.getChar());
-    	else
-    		System.out.println(root.getFrequency());
-
-    	if(root.hasLeft())
-    	{
-    		System.out.println("Moving Left To " + root.getLeft().getFrequency());
-    		print(root.getLeft());
-    	}
-    	if(root.hasRight())
-		{
-			System.out.println("Moving Right To " + root.getRight().getFrequency());
-			print(root.getRight());
-		}
-
-		if(!root.hasChar())
-		{
-			System.out.println("Finished With Node NONE");
-			System.out.println("Frequency: " + root.getFrequency());
-		}
-		else if(root.hasChar())
-		{
-			System.out.println("Finished With Node " + root.getChar());
-			System.out.println("Frequency: " + root.getFrequency());
-		}
-	
-    }
 	
     public static void main(String[] args)
     {
